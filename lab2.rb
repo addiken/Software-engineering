@@ -12,8 +12,9 @@ end
 
 # Скрипт №1
 def script1
-  str = inputWithCondition("строку", false)
-  i = inputWithCondition("число", true)
+  s = inputWithCondition("число и строку через пробел", false).split(' ')
+  str = s[1].chomp
+  i = s[0].to_i
   if str[-2, 2] == ('CS')
     puts("2 ^ #{i} = #{2**i}")
   else
@@ -21,6 +22,7 @@ def script1
   end
 end
 
+# Скрипт №1
 def script2
   pokemons = []
   iterations = inputWithCondition('количество покемонов', true)
