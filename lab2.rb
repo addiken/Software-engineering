@@ -13,7 +13,7 @@ end
 # Скрипт №1
 def script1
   s = inputWithCondition("число и строку через пробел", false).split(' ')
-  str = s[1].chomp
+  str = s[1].chomp.upcase
   i = s[0].to_i
   if str[-2, 2] == ('CS')
     puts("2 ^ #{i} = #{2**i}")
