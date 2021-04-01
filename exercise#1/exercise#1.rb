@@ -8,7 +8,7 @@ class CashMachine
       balanceValue.puts("100.00")
       balanceValue.close
       balanceValue = File.open('balance.txt', 'r')
-      @balance = balanceValue.rea.chomp.to_f
+      @balance = balanceValue.read.chomp.to_f
     end
   end
 
