@@ -82,7 +82,7 @@ class CommentsController
   def update()
     i = inputWithCondition("comment index", true)
     str = inputWithCondition("comment text", false)
-    @comments[i] = str
+    @comments[i][1] = str
     @comments.each_with_index do |comment, index|
       if i == index
         print index
