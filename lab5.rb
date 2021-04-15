@@ -27,7 +27,7 @@ class CashMachine
     balanceValue = File.open('balance.txt', 'w')
     balanceValue.puts(@balance)
     balanceValue.close
-    "Новый баланс: #{@balance}"
+    "New balance: #{@balance}"
   end
 
   def deposit(depositeValue)
@@ -39,11 +39,11 @@ class CashMachine
     balanceValue = File.open('balance.txt', 'w')
     balanceValue.puts(@balance)
     balanceValue.close
-    "Новый баланс: #{@balance}"
+    "New balance: #{@balance}"
   end
 
   def balance
-    "Текущий баланс: #{@balance}"
+    "Balance: #{@balance}"
   end
 
 end
@@ -70,6 +70,6 @@ while connection = server.accept
                    when 'balance'
                      cashMachine.balance
                    else
-                     'ошиб очка'
+                     'error'
                    end
 end
