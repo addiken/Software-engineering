@@ -4,41 +4,40 @@ server = TCPServer.new(3000)
 
 class CashMachine
   def initialize
-    if File.exists?('balance.txt')
-      balanceValue = File.open('balance.txt', 'r')
-      @balance = balanceValue.read.chomp.to_f
+    if File.exists?('balance.txt') 
+      balance_value = File.open('balance.txt', 'r')
+      @balance = balance_value.read.chomp.to_f
     else
-      balanceValue = File.open('balance.txt', 'w')
-      balanceValue.puts('100.00')
-      balanceValue.close
-      balanceValue = File.open('balance.txt', 'r')
-      @balance = balanceValue.read.chomp.to_f
+      balance_value = File.open('balance.txt', 'w')
+      balance_value.puts('100.00')
+      balance_value.close
+      balance_value = File.open('balance.txt', 'r')
+      @balance = balance_value.read.chomp.to_f
     end
   end
 
-  def withdraw(withdrawValue)
-    if withdrawValue < 0
-      abort 'Ошибка! Введено отрицательное число.'
+  def withdraw(withdraw_value)
+    if withdraw_value.negative?
+      'Ошибка! Введено отрицательное число.'
     end
-    if @balance < withdrawValue
-      abort 'Ошибка! Нехватает средств.'
+    if @balance < withdraw_value
+      'Ошибка! Нехватает средств.'
     end
-    @balance -= withdrawValue
-    balanceValue = File.open('balance.txt', 'w')
-    balanceValue.puts(@balance)
-    balanceValue.close
+    @balance -= withdraw_value
+    balance_value = File.open('balance.txt', 'w') 
+    balance_value.puts(@balance)
+    balance_value.close
     "New balance: #{@balance}"
   end
 
-  def deposit(depositeValue)
-    if depositeValue < 0
-      abort 'Ошибка! Введено отрицательное число.'
-      exit
+  def deposit(deposite_value) 
+    if deposite_value.negative?
+      'Ошибка! Введено отрицательное число.'
     end
-    @balance += depositeValue
-    balanceValue = File.open('balance.txt', 'w')
-    balanceValue.puts(@balance)
-    balanceValue.close
+    @balance += deposite_value
+    balance_value = File.open('balance.txt', 'w') 
+    balance_value.puts(@balance)
+    balance_value.close
     "New balance: #{@balance}"
   end
 
@@ -48,9 +47,9 @@ class CashMachine
 
 end
 
-while connection = server.accept
+while (connection = server.accept)
 
-  cashMachine = CashMachine.new
+  cash_machine = CashMachine.new
 
   request = connection.gets
   m, full_path = request.split(' ')
@@ -64,11 +63,11 @@ while connection = server.accept
 
   connection.print case method
                    when 'deposit'
-                     cashMachine.deposit(value)
+                     cash_machine.deposit(value)
                    when 'withdraw'
-                     cashMachine.withdraw(value)
+                     cash_machine.withdraw(value)
                    when 'balance'
-                     cashMachine.balance
+                     cash_machine.balance
                    else
                      'error'
                    end
